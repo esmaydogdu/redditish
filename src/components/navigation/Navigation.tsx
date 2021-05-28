@@ -10,7 +10,7 @@ export const Navigation = () => {
     >
       <Col>
         <Link data-testid="navigation-home-link" to="/">
-          <Image data-testid="navigation-logo" src={logo} />
+          <Image data-testid="navigation-logo" alt="Hepsiburada Logo" src={logo} />
         </Link>
       </Col>
       <Col data-testid="navigation-right" className="navigation-text text-right">
