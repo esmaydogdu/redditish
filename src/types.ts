@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 export type ContextProps = {
   children:
     | boolean
@@ -7,3 +8,16 @@ export type ContextProps = {
     | null
     | undefined;
 };
+
+export type Post = {
+  name: string;
+  url: string;
+  votes: number;
+  timestamp: number;
+};
+
+export enum SearchParams {
+  asc = "asc",
+  desc = "desc",
+  page = "page",
+}

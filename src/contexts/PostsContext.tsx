@@ -1,7 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { ContextProps } from "../types";
+import { ContextProps, Post, SearchParams } from "../types";
 
 export const PostsContext = createContext({} as any);
 
@@ -12,14 +11,92 @@ export const PostsProvider = (props: ContextProps) => {
 
   // Posts are initially read from localStorage, if not it is [].
   const [posts, setPosts] = useState(
-    JSON.parse(localStorage.getItem("posts") || "[]")
+    JSON.parse(localStorage.getItem("posts") || "[]") as Post[]
   );
 
   // FilteredPosts are modified Posts accordingly history location search params.
-  const [filteredPosts, setFilteredPosts] = useState([]);
+  const [filteredPosts, setFilteredPosts] = useState([] as Post[]);
 
   // PerPage is the number of posts within a page.
-  const [perPage, setPerPage] = useState(3);
+  const [perPage] = useState(3);
+
+  // sortBy method will sort and paginate by history location search params,
+  // It will use actual posts array and set this into filteredPosts array.
+  const sortBy = () => {
+    // Reading history location to extract search params to decide sorting and paging choice.
+    const searchParams = new URLSearchParams(history.location.search);
+    const sortParam = searchParams.get("sort");
+    const pageParam = Number(searchParams.get("page")) || 1;
+
+    // To keep this state immutable.
+    let _posts = posts.slice();
+
+    // Sorting algorithm according to the sort search param.
+    if (sortParam === SearchParams.asc) {
+      _posts.sort((a, b) => a.votes - b.votes || b.timestamp - a.timestamp);
+    } else if (sortParam === SearchParams.desc) {
+      _posts.sort((a, b) => b.votes - a.votes || b.timestamp - a.timestamp);
+    } else {
+      _posts.sort((a, b) => b.timestamp - a.timestamp);
+    }
+
+    // Pagination algorithm also reads page param from history location and sliceses the posts array.
+    _posts = _posts.slice(pageParam * perPage - perPage, pageParam * perPage);
+    setFilteredPosts(_posts);
+    localStorage.setItem("posts", JSON.stringify(posts));
+  };
+
+  // It handles the click delete on post.
+  const handleClickDeletePost = (timestamp: number) => {
+    // Deletes the selected post by its timestamp.
+    let _posts = posts.filter((post) => post.timestamp !== timestamp);
+    setPosts(_posts);
+
+    /*
+      In case of the deletion of last element on a page,
+      we have to redirect the user to the previous page.
+    */
+    const searchParams = new URLSearchParams(history.location.search);
+    const pageParam = Number(searchParams.get("page"));
+
+    // Calculates the amount of posts on the active page(read from history).
+    _posts = _posts.slice(pageParam * perPage - perPage, pageParam * perPage);
+
+    if (_posts.length === 0) {
+      searchParams.set("page", "1");
+      history.push({ pathname: "/", search: searchParams.toString() });
+    }
+  };
+
+  const handleClickUpvote = (timestamp: number) => {
+    setPosts(
+      posts.map((post) => {
+        if (post.timestamp === timestamp) {
+          post.votes++;
+        }
+        return post;
+      })
+    );
+  };
+
+  const handleClickDownvote = (timestamp: number) => {
+    setPosts(
+      posts.map((post) => {
+        if (post.timestamp === timestamp) {
+          post.votes--;
+        }
+        return post;
+      })
+    );
+  };
+
+  // Applies effects on every posts changes or history changes.
+  // Also cleans the history listener on component will unmount to avoid multiple register listeners(sortBy).
+  useEffect(() => {
+    sortBy();
+    return history.listen(sortBy)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [posts]);
 
   return (
     <PostsContext.Provider
@@ -28,6 +105,9 @@ export const PostsProvider = (props: ContextProps) => {
         setPosts,
         filteredPosts,
         perPage,
+        handleClickDeletePost,
+        handleClickUpvote,
+        handleClickDownvote,
       }}
     >
       {props.children}

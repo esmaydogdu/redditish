@@ -1,5 +1,6 @@
 import { SortDropdown, Post, Pagination } from "../../components";
 import { usePosts } from "../../contexts";
+import { Post as PostType } from "../../types";
 
 export const PostsContainer = () => {
   const { filteredPosts } = usePosts();
@@ -7,7 +8,7 @@ export const PostsContainer = () => {
   return (
     <>
       <SortDropdown />
-      {filteredPosts.map((post: any) => (
+      {filteredPosts.map((post: PostType) => (
         <Post key={post.timestamp} {...post} />
       ))}
       <Pagination />

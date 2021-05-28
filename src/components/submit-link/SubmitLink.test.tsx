@@ -3,18 +3,28 @@ import { render, screen } from "@testing-library/react";
 import { SubmitLink } from "./SubmitLink";
 import { MemoryRouter } from "react-router-dom";
 
-test("renders learn react link", () => {
-  render(<SubmitLink />, { wrapper: MemoryRouter });
- 
-  const submitLinkWrapper = screen.getByTestId("submit-link-wrapper");
-  expect(submitLinkWrapper).toBeInTheDocument();
+describe("[SubmitLink.tsx]", () => {
+  beforeEach(() => {
+    render(<SubmitLink />, { wrapper: MemoryRouter });
+  });
 
-  const submitLinkElement = screen.getByTestId("submit-link");
-  expect(submitLinkElement.getAttribute("href")).toBe("/submit") 
+  it("should render submit link wrapper", () => {
+    const submitLinkWrapper = screen.getByTestId("submit-link-wrapper");
+    expect(submitLinkWrapper).toBeInTheDocument();
+  });
 
-  const submitLinkButton = screen.getByTestId("submit-link-button");
-  expect(submitLinkButton.textContent).toBe("Submit Link")
+  it("should render submit link", () => {
+    const submitLinkElement = screen.getByTestId("submit-link");
+    expect(submitLinkElement.getAttribute("href")).toBe("/submit");
+  });
 
-  const submitLinkButtonIcon = screen.getByTestId("submit-link-button-icon");
-  expect(submitLinkButtonIcon).toBeInTheDocument();
+  it("should render submit link button", () => {
+    const submitLinkButton = screen.getByTestId("submit-link-button");
+    expect(submitLinkButton.textContent).toBe("Submit Link");
+  });
+
+  it("should render submit link button icon", () => {
+    const submitLinkButtonIcon = screen.getByTestId("submit-link-button-icon");
+    expect(submitLinkButtonIcon).toBeInTheDocument();
+  });
 });
