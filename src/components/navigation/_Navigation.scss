@@ -1,0 +1,17 @@
+.navigation-container {
+  .navigation-text {
+    > span {
+      font-size: 1.2rem;
+      &:first-child {
+        font-weight: 900;
+      }
+      &:nth-child(2) {
+        font-weight: 200;
+        letter-spacing: 1px;
+      }
+      &:last-child {
+        letter-spacing: 0.5px;
+      }
+    }
+  }
+}

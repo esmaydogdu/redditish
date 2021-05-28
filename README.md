@@ -1,46 +1,38 @@
-# Getting Started with Create React App
+# Data format
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+```javascript
+// Posts context holds the data as below.
+const posts = [
+  { timestamp: 1, name: "reddit", url: "https://reddit.com", vote: 2 },
+  { timestamp: 2, name: "google", url: "https://google.com", vote: 1 },
+  { timestamp: 3, name: "twitter", url: "https://twitter.com", vote: 2 },
+  { timestamp: 4, name: "facebook", url: "https://facebook.com", vote: -5 },
+];
+```
 
-## Available Scripts
+```javascript
+// Sorting strategy.
+// Sorting by vote
+// If the votes are equal, latest post will be first.
 
-In the project directory, you can run:
+// Descending
+posts.sort((a, b) => b.vote - a.vote || b.timestamp - a.timestamp);
 
-### `npm start`
+// Ascending
+posts.sort((a, b) => a.vote - b.vote || b.timestamp - a.timestamp);
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+// Adding new post.
+posts.push({timestamp: Date.now(), name: "testname", url: "https://github.com", vote: 0})
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+// Removing selected post by timestamp.
+posts.filter(post => post.timestamp !== 1622050400326)
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+// Pagination algorithm.
+let page = 1;
+let perPage = 2;
+posts.slice(page * perPage - perPage, page * perPage)
+[ 
+  { timestamp: 1, name: "reddit", url: "https://reddit.com", vote: 2 },
+  { timestamp: 2, name: "google", url: "https://google.com", vote: 1 }
+]
+```
