@@ -1,4 +1,6 @@
+# Pipeline installation docs:
 # https://dev.to/ajinkabeer/deploy-cra-to-github-pages-using-github-actions-44o7
+# https://create-react-app.dev/docs/deployment/#step-4-for-a-project-page-ensure-your-projects-settings-use-gh-pages
 name: Deployment
 on:
   push:

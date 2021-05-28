@@ -1,0 +1,19 @@
+.submit-link-button {
+  border-bottom: 3px solid #eaeaea;
+  .btn {
+    position: relative;
+    height: 80px;
+    svg {
+      position: absolute;
+      left: 1rem;
+      font-size: 3.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    span {
+      text-transform: uppercase;
+      font-weight: 500;
+      font-size: 1.6rem;
+    }
+  }
+}

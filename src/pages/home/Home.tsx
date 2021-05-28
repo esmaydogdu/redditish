@@ -1,5 +1,11 @@
+import { SubmitLink } from "../../components";
+import { PostsContainer } from "../../containers";
+
 export const Home = () => {
-  return(
-    <h1>helo</h1>
-  )
-}
+  return (
+    <div className="page-wrapper mt-5">
+      <SubmitLink />
+      <PostsContainer />
+    </div>
+  );
+};
