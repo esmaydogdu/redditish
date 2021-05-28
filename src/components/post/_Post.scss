@@ -1,0 +1,30 @@
+.post-container {
+  position: relative;
+  cursor: default;
+  transition: 0.3s all;
+  .votes-container {
+    background: rgba(255, 96, 0, 0.1);
+  }
+  .remove-icon {
+    position: absolute;
+    right: -0.5rem;
+    top: -0.5rem;
+    visibility: hidden;
+    opacity: 0;
+    font-size: 1.4rem;
+    cursor: pointer;
+    transition: 0.3s all;
+  }
+  &:hover {
+    background: #fafafa;
+    .remove-icon {
+      opacity: 100%;
+      visibility: visible;
+    }
+  }
+  .vote-button {
+    &:hover {
+      text-shadow: 0.5px 0 0 currentColor;
+    }
+  }
+}

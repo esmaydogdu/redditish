@@ -3,14 +3,20 @@ import { useState } from "react";
 import { ArrowUp, ArrowDown, DashCircleFill } from "react-bootstrap-icons";
 import { usePosts } from "../../contexts";
 import { Post as PostType } from "../../types";
+import { useToasts } from "react-toast-notifications";
 
 export const Post = ({ timestamp, votes, name, url }: PostType) => {
   const { handleClickDeletePost, handleClickUpvote, handleClickDownvote } =
     usePosts();
+  const { addToast } = useToasts();
 
   const handleClickDelete = () => {
     handleClickDeletePost(timestamp);
     setModalShown(false);
+    addToast(`${name} REMOVED`, {
+      appearance: "success",
+      autoDismiss: true,
+    });
   };
 
   const [isModalShown, setModalShown] = useState(false);
@@ -71,7 +77,7 @@ export const Post = ({ timestamp, votes, name, url }: PostType) => {
 
         <Modal.Body data-testid="post-modal-body">
           <p>Do you want to remove:</p>
-          <h1>{name}</h1>
+          <h3>{name}</h3>
         </Modal.Body>
 
         <Modal.Footer>
