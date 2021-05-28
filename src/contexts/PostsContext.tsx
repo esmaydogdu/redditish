@@ -117,6 +117,7 @@ export const PostsProvider = (props: ContextProps) => {
 
 export const usePosts = () => {
   const context = useContext(PostsContext);
+  /* istanbul ignore if */
   if (context === undefined) {
     throw new Error("usePosts must be used within a PostsProvider");
   }
