@@ -3,7 +3,7 @@ import { Navigation } from "./components";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { Home, NotFound, Submit } from "./pages";
 import { PostsProvider } from "./contexts/PostsContext";
-
+import { ToastProvider } from "react-toast-notifications";
 
 function App() {
   return (
@@ -11,15 +11,21 @@ function App() {
       <BrowserRouter>
         <Navigation />
         <PostsProvider>
-          <Switch>
-            <Route path="/submit">
-              <Submit />
-            </Route>
-            <Route path="/" exact>
-              <Home />
-            </Route>
-            <Route component={NotFound} />
-          </Switch>
+          <ToastProvider
+            autoDismiss
+            autoDismissTimeout={3000}
+            placement="top-center"
+          >
+            <Switch>
+              <Route path="/submit">
+                <Submit />
+              </Route>
+              <Route path="/" exact>
+                <Home />
+              </Route>
+              <Route component={NotFound} />
+            </Switch>
+          </ToastProvider>
         </PostsProvider>
       </BrowserRouter>
     </div>

@@ -1,6 +1,7 @@
 import { Form, Button } from "react-bootstrap";
 import { useState } from "react";
 import { usePosts } from "../../contexts";
+import { useToasts } from "react-toast-notifications";
 
 export const SubmitFormContainer = () => {
   // We want to take url and name from form and place them into PostsContext
@@ -10,6 +11,7 @@ export const SubmitFormContainer = () => {
   const [url, setUrl] = useState("");
   // setValidated function checks validity of inputs if true.
   const [validated, setValidated] = useState(false);
+  const { addToast } = useToasts();
 
   const addPost = (e: any) => {
     e.preventDefault();
@@ -23,6 +25,10 @@ export const SubmitFormContainer = () => {
     setPosts([...posts, { timestamp: Date.now(), name, url, votes: 0 }]);
     setName("");
     setUrl("");
+    addToast(`${name} ADDED`, {
+      appearance: 'success',
+      autoDismiss: true,
+    })
   };
 
   const updateName = (e: any) => {

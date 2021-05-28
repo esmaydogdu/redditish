@@ -1,5 +1,6 @@
-import { FC } from "react";
+import React, { FC } from "react";
 import { MemoryRouter } from "react-router-dom";
+import { ToastProvider } from "react-toast-notifications";
 import { PostsProvider } from "./contexts";
 
 export const ProviderWrapper = ({ children }: { children: FC }) => {
@@ -9,10 +10,12 @@ export const ProviderWrapper = ({ children }: { children: FC }) => {
     { timestamp: 3, name: "twitter", url: "https://twitter.com", vote: 2 },
     { timestamp: 4, name: "facebook", url: "https://facebook.com", vote: -5 },
   ];
-  localStorage.setItem('posts', JSON.stringify(initialPosts))
+  localStorage.setItem("posts", JSON.stringify(initialPosts));
   return (
     <MemoryRouter>
-      <PostsProvider>{children}</PostsProvider>
+      <PostsProvider>
+        <ToastProvider>{children}</ToastProvider>
+      </PostsProvider>
     </MemoryRouter>
   );
 };
