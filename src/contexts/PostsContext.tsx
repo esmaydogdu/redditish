@@ -4,6 +4,15 @@ import { ContextProps, Post, SearchParams } from "../types";
 
 export const PostsContext = createContext({} as any);
 
+export const initialPosts = [
+  { timestamp: 1, name: "reddit", url: "https://reddit.com", votes: 2 },
+  { timestamp: 2, name: "google", url: "https://google.com", votes: 1 },
+  { timestamp: 3, name: "twitter", url: "https://twitter.com", votes: 2 },
+  { timestamp: 4, name: "facebook", url: "https://facebook.com", votes: -5 },
+  { timestamp: 5, name: "github", url: "https://github.com", votes: 3 },
+  { timestamp: 6, name: "codepen", url: "https://codepen.com", votes: 2 },
+];
+
 export const PostsProvider = (props: ContextProps) => {
   // We will use history for storing sorting and pagination mechanism.
   // We will also listen history changes to change sorting and pagination.
@@ -11,14 +20,16 @@ export const PostsProvider = (props: ContextProps) => {
 
   // Posts are initially read from localStorage, if not it is [].
   const [posts, setPosts] = useState(
-    JSON.parse(localStorage.getItem("posts") || "[]") as Post[]
+    JSON.parse(
+      localStorage.getItem("posts") || JSON.stringify(initialPosts)
+    ) as Post[]
   );
 
   // FilteredPosts are modified Posts accordingly history location search params.
   const [filteredPosts, setFilteredPosts] = useState([] as Post[]);
 
   // PerPage is the number of posts within a page.
-  const [perPage] = useState(3);
+  const [perPage] = useState(5);
 
   // sortBy method will sort and paginate by history location search params,
   // It will use actual posts array and set this into filteredPosts array.
@@ -62,7 +73,7 @@ export const PostsProvider = (props: ContextProps) => {
     // Calculates the amount of posts on the active page(read from history).
     _posts = _posts.slice(pageParam * perPage - perPage, pageParam * perPage);
 
-    if (_posts.length === 0) {
+    if (_posts.length === 0 && pageParam > 1) {
       searchParams.set("page", String(pageParam - 1));
       history.push({ pathname: "/", search: searchParams.toString() });
     }
