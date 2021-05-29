@@ -37,10 +37,14 @@ export const Post = ({ timestamp, votes, name, url }: PostType) => {
           <p className="m-0">POINTS</p>
         </div>
         <Card.Body className="py-0">
-          <Card.Title data-testid="post-name" className="mb-1">
+          <Card.Title data-testid="post-name" className="mb-1 text-break">
             {name}
           </Card.Title>
-          <Card.Text data-testid="post-url">({url})</Card.Text>
+          <Card.Text className="text-break" data-testid="post-url">
+            <a href={url} target="_blank" rel="noreferrer">
+              ({url})
+            </a>
+          </Card.Text>
           <div className="d-flex flex-row justify-content-between align-items-center">
             <button
               data-testid="post-upvote-button"

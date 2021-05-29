@@ -11,6 +11,14 @@ Added features below into CRA:
 
 ![Test coverage](./test.png)
 
+# Home page
+
+![Home page](./homepage.jpg)
+
+# Submit page
+
+![Submit page](./submitpage.jpg)
+
 # Demo: GitHub Pages
 
 ```
