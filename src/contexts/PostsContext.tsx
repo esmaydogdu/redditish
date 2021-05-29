@@ -86,6 +86,7 @@ export const PostsProvider = (props: ContextProps) => {
       posts.map((post) => {
         if (post.timestamp === timestamp) {
           post.votes++;
+          post.timestamp = Date.now();
         }
         return post;
       })
@@ -97,6 +98,7 @@ export const PostsProvider = (props: ContextProps) => {
       posts.map((post) => {
         if (post.timestamp === timestamp) {
           post.votes--;
+          post.timestamp = Date.now();
         }
         return post;
       })

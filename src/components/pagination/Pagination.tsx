@@ -33,6 +33,7 @@ export const Pagination = () => {
   useEffect(() => {
     return history.listen(() => {
       const params = new URLSearchParams(history.location.search);
+      /* istanbul ignore next */
       setActivePage(Number(params.get("page")) || 1);
     });
     // eslint-disable-next-line
