@@ -68,12 +68,14 @@ export const PostsProvider = (props: ContextProps) => {
       we have to redirect the user to the previous page.
     */
     const searchParams = new URLSearchParams(history.location.search);
-    const pageParam = Number(searchParams.get("page"));
+
+    // When there is no page parameter in history pageParam is 1.
+    const pageParam = Number(searchParams.get("page")) || 1;
 
     // Calculates the amount of posts on the active page(read from history).
     _posts = _posts.slice(pageParam * perPage - perPage, pageParam * perPage);
 
-    if (_posts.length === 0 && pageParam > 1) {
+    if (_posts.length === 0) {
       searchParams.set("page", String(pageParam - 1));
       history.push({ pathname: "/", search: searchParams.toString() });
     }
