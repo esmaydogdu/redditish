@@ -35,6 +35,7 @@ export const Pagination = () => {
       const params = new URLSearchParams(history.location.search);
       setActivePage(Number(params.get("page")) || 1);
     });
+    // eslint-disable-next-line
   }, []);
 
   // When there is no page, pagination will not render.

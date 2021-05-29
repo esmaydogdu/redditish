@@ -1,3 +1,32 @@
+# Case
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+Added features below into CRA:
+
+- [x] Typescript
+- [x] Bootstrap
+- [x] React Router
+- [x] GitHub Actions { Install, Run unit tests, Build, Deploy }
+
+![Test coverage](./test.png)
+
+# Demo: GitHub Pages
+
+```
+https://case.esma.dev/
+```
+
+# Start locally
+
+```bash
+git clone git@github.com:esmaydogdu/hepsiburada.git esma-case;
+cd esma-case;
+npm install;
+npm start;
+```
+
+
 # Data format
 
 ```javascript
