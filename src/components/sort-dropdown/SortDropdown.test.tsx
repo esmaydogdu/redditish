@@ -7,10 +7,12 @@ describe("[SortDropdown.tsx]", () => {
   beforeEach(() => {
     render(<SortDropdown />, { wrapper: ProviderWrapper as FC });
   });
+
   it("should render dropdown element", () => {
     const dropdownWrapper = screen.getByTestId("dropdown-wrapper");
     expect(dropdownWrapper).toBeInTheDocument();
   });
+
   it("should set dropdown toggle as selected item", async () => {
     const dropdownToggle = screen.getByTestId("dropdown-selected");
     expect(dropdownToggle.textContent).toBe("Order By");
@@ -30,15 +32,14 @@ describe("[SortDropdown.tsx]", () => {
 
     await waitFor(() => screen.getByTestId("dropdown-item-desc"));
 
-     fireEvent.click(dropdownItemAsc);
-     expect(dropdownToggle.textContent).toBe(dropdownItemAsc.textContent);
+    fireEvent.click(dropdownItemAsc);
+    expect(dropdownToggle.textContent).toBe(dropdownItemAsc.textContent);
 
-     fireEvent.click(dropdownToggle);
+    fireEvent.click(dropdownToggle);
 
-     await waitFor(() => screen.getByTestId("dropdown-item-desc"));
+    await waitFor(() => screen.getByTestId("dropdown-item-desc"));
 
-     fireEvent.click(dropdownItemOrderBy);
-     expect(dropdownToggle.textContent).toBe(dropdownItemOrderBy.textContent);
-
+    fireEvent.click(dropdownItemOrderBy);
+    expect(dropdownToggle.textContent).toBe(dropdownItemOrderBy.textContent);
   });
 });

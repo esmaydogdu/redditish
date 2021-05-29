@@ -43,6 +43,7 @@ export const Pagination = () => {
   if (pageNumbers.length === 0) {
     return null;
   }
+
   return (
     <BPagination
       data-testid="pagination-wrapper"

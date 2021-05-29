@@ -105,8 +105,8 @@ export const PostsProvider = (props: ContextProps) => {
   // Also cleans the history listener on component will unmount to avoid multiple register listeners(sortBy).
   useEffect(() => {
     sortBy();
-    return history.listen(sortBy)
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    return history.listen(sortBy);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [posts]);
 
   return (

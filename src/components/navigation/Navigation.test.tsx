@@ -8,6 +8,7 @@ describe("[Navigation.tsx]", () => {
   beforeEach(() => {
     render(<Navigation />, { wrapper: MemoryRouter });
   });
+
   it("should render navigation container", () => {
     const navigationContainerElement = screen.getByTestId(
       "navigation-container"

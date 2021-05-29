@@ -13,4 +13,3 @@ export const ProviderWrapper = ({ children }: { children: FC }) => {
     </MemoryRouter>
   );
 };
-

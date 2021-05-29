@@ -26,9 +26,9 @@ export const SubmitFormContainer = () => {
     setName("");
     setUrl("");
     addToast(`${name} ADDED`, {
-      appearance: 'success',
+      appearance: "success",
       autoDismiss: true,
-    })
+    });
   };
 
   const updateName = (e: any) => {

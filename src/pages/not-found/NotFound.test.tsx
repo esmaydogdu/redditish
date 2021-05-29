@@ -12,7 +12,6 @@ describe("[NotFound.tsx]", () => {
 
   it("should render not found page", () => {
     const notFoundElement = screen.getByTestId("notfound");
-    expect(notFoundElement.textContent).toBe("404 not found");
+    expect(notFoundElement.textContent).toBe("404 Not Found");
   });
-
 });

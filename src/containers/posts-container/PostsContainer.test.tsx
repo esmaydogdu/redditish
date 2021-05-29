@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { fireEvent, render, screen, waitFor, waitForElementToBeRemoved } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { PostsContainer } from "./PostsContainer";
 import { ProviderWrapper } from "../../wrapper";
 import { MemoryRouter } from "react-router-dom";
@@ -35,7 +35,7 @@ describe("[PostsContainer.tsx]", () => {
     expect(formPosts).toHaveLength(5);
 
     const postDeleteButtons = screen.getAllByTestId("post-delete-button");
-    expect(postDeleteButtons).toHaveLength(5)
+    expect(postDeleteButtons).toHaveLength(5);
   });
 });
 
@@ -51,5 +51,4 @@ test("EDGE CASE ALERT: Delete last element of a page should redirect previous pa
 
   const postModalButtonDelete = screen.getByTestId("post-modal-button-delete");
   fireEvent.click(postModalButtonDelete);
-
 });
