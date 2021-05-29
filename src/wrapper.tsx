@@ -19,3 +19,13 @@ export const ProviderWrapper = ({ children }: { children: FC }) => {
     </MemoryRouter>
   );
 };
+
+export const EmptyProviderWrapper = ({ children }: { children: FC }) => {
+  return (
+    <MemoryRouter>
+      <PostsProvider>
+        <ToastProvider>{children}</ToastProvider>
+      </PostsProvider>
+    </MemoryRouter>
+  );
+};

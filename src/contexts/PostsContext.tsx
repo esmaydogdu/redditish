@@ -63,7 +63,7 @@ export const PostsProvider = (props: ContextProps) => {
     _posts = _posts.slice(pageParam * perPage - perPage, pageParam * perPage);
 
     if (_posts.length === 0) {
-      searchParams.set("page", "1");
+      searchParams.set("page", String(pageParam - 1));
       history.push({ pathname: "/", search: searchParams.toString() });
     }
   };
