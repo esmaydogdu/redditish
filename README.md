@@ -28,7 +28,7 @@ https://case.esma.dev/
 # Start locally
 
 ```bash
-git clone git@github.com:esmaydogdu/hepsiburada.git esma-case;
+git clone git@github.com:esmaydogdu/redditish.git esma-case;
 cd esma-case;
 npm install;
 npm start;

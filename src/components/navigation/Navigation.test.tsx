@@ -2,7 +2,7 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import { Navigation } from "./Navigation";
 import { MemoryRouter } from "react-router-dom";
-import logo from "../../assets/hb-logo.svg";
+import logo from "../../assets/logo.svg";
 
 describe("[Navigation.tsx]", () => {
   beforeEach(() => {
@@ -27,13 +27,13 @@ describe("[Navigation.tsx]", () => {
   it("should render the logo", () => {
     const navigationImageElement = screen.getByTestId("navigation-logo");
     expect(navigationImageElement).toBeInTheDocument();
-    expect(navigationImageElement.getAttribute("alt")).toBe("Hepsiburada Logo");
+    expect(navigationImageElement.getAttribute("alt")).toBe("React Logo");
     expect(navigationImageElement.getAttribute("src")).toBe(logo);
   });
 
   it("should render right side of the navigation", () => {
     const navigationRightElement = screen.getByTestId("navigation-right");
     expect(navigationRightElement).toBeInTheDocument();
-    expect(navigationRightElement.childElementCount).toBe(3);
+    expect(navigationRightElement.childElementCount).toBe(2);
   });
 });

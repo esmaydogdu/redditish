@@ -40,8 +40,22 @@ describe("[SubmitFormContainer.tsx]", () => {
     expect(nameElement).toBeInTheDocument();
     expect(urlElement).toBeInTheDocument();
 
-    fireEvent.change(nameElement, { target: { value: "github" } });
-    fireEvent.change(urlElement, { target: { value: "https://github.com" } });
+    fireEvent.change(nameElement, { target: { value: "instagram" } });
+    fireEvent.change(urlElement, { target: { value: "https://instagram.com" } });
+    fireEvent.click(formSubmit);
+  });
+
+  it("should fill form with same data", () => {
+    const nameElement = screen.getByTestId("form-control-name");
+    const urlElement = screen.getByTestId("form-control-url");
+    const formSubmit = screen.getByTestId("form-submit-button");
+    expect(nameElement).toBeInTheDocument();
+    expect(urlElement).toBeInTheDocument();
+
+    fireEvent.change(nameElement, { target: { value: "reddit" } });
+    fireEvent.change(urlElement, {
+      target: { value: "https://reddit.com" },
+    });
     fireEvent.click(formSubmit);
   });
 });
