@@ -75,7 +75,7 @@ export const PostsProvider = (props: ContextProps) => {
     // Calculates the amount of posts on the active page(read from history).
     _posts = _posts.slice(pageParam * perPage - perPage, pageParam * perPage);
 
-    if (_posts.length === 0) {
+    if (_posts.length === 0 && pageParam > 1) {
       searchParams.set("page", String(pageParam - 1));
       history.push({ pathname: "/", search: searchParams.toString() });
     }
@@ -96,7 +96,7 @@ export const PostsProvider = (props: ContextProps) => {
   const handleClickDownvote = (timestamp: number) => {
     setPosts(
       posts.map((post) => {
-        if (post.timestamp === timestamp) {
+        if (post.timestamp === timestamp && post.votes > 0) {
           post.votes--;
           post.timestamp = Date.now();
         }

@@ -2,6 +2,8 @@ import { Form, Button } from "react-bootstrap";
 import { useState } from "react";
 import { usePosts } from "../../contexts";
 import { useToasts } from "react-toast-notifications";
+import { Post } from "../../types";
+// import { Post } from "../../types";
 
 export const SubmitFormContainer = () => {
   // We want to take url and name from form and place them into PostsContext
@@ -19,6 +21,14 @@ export const SubmitFormContainer = () => {
     if (form.checkValidity() === false) {
       e.stopPropagation();
       setValidated(true);
+      return;
+    }
+    const isThatPostExists = posts.find((post: Post) => post.url === url)
+    if (isThatPostExists) {
+      e.stopPropagation();
+      addToast(`${name} ALREADY EXISTS`, {
+        autoDismiss: true,
+      });
       return;
     }
     setValidated(false);

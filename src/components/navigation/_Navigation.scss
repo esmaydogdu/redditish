@@ -1,4 +1,9 @@
 .navigation-container {
+  .navigation-home-link {
+    img {
+      max-width: 60px;
+    }
+  }
   .navigation-text {
     > span {
       font-size: 1.2rem;

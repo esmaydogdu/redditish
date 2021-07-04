@@ -1,7 +1,7 @@
 import { Dropdown } from "react-bootstrap";
 import { ArrowRight } from "react-bootstrap-icons";
 import { useHistory } from "react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SearchParams } from "../../types";
 
 export const SortDropdown = () => {
@@ -17,7 +17,7 @@ export const SortDropdown = () => {
         Most Voted (Z <ArrowRight /> A)
       </>
     ),
-    orderby: "Order By",
+    [SearchParams.orderby]: "Order By",
   };
 
   // Sort query value is read from history and set into state as selected sort type.
@@ -25,7 +25,7 @@ export const SortDropdown = () => {
   const sortParam = params.get("sort");
 
   // Selected state is to be used on active state of dropdown items.
-  const [selected, setSelected] = useState(sortParam || "orderby");
+  const [selected, setSelected] = useState(sortParam || SearchParams.orderby);
 
   // When dropdown gets click it changes selected sort.
   // It also pushes as a search parameter into history.
@@ -46,9 +46,9 @@ export const SortDropdown = () => {
         <Dropdown.Menu className="w-100">
           <Dropdown.Item
             data-testid="dropdown-item-orderby"
-            active={"orderby" === selected}
+            active={SearchParams.orderby === selected}
             className="text-capitalize"
-            onClick={() => handleClickDropdown("orderby")}
+            onClick={() => handleClickDropdown(SearchParams.orderby)}
           >
             Order By
           </Dropdown.Item>

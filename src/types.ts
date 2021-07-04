@@ -19,5 +19,6 @@ export type Post = {
 export enum SearchParams {
   asc = "asc",
   desc = "desc",
+  orderby = "orderby",
   page = "page",
 }
