@@ -1,7 +1,7 @@
 import { Dropdown } from "react-bootstrap";
 import { ArrowRight } from "react-bootstrap-icons";
 import { useHistory } from "react-router";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { SearchParams } from "../../types";
 
 export const SortDropdown = () => {
